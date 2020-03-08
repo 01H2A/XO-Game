@@ -112,9 +112,9 @@ int main()
 
 
     cout<<"Enter the name of player one : ";\
-    cin>>p1;
+    getline(cin,p1);
     cout<<"Enter the name of player two : ";
-    cin>>p2;
+    getline(cin,p2);
     system("cls");
 
     for(int turn = 1; turn <=9 ; turn++)
@@ -123,22 +123,61 @@ int main()
         p_turn(p1,p2,turn);
 
         int r , c;
+        cout<<"\n";
+        print_mat(mat);
+
+        inp_r :
         cout<<"Enter Row Number : "; cin>>r;
+
+        if(cin.fail())
+        {
+        cin.clear();
+        cin.ignore(1000000, '\n');
+        cout<<"Invalid Input\n\n";
+        goto inp_r ;
+        }else if(!(r >0 && r < 4))
+        {
+            cout<<"Row Number Must Be Between 1 and 3\n\n";
+            turn--;
+            goto inp_r;
+        }
+
+        inp_c :
         cout<<"Enter column Number : "; cin>>c;
+
+        if(cin.fail())
+        {
+        cin.clear();
+        cin.ignore(1000000, '\n');
+        cout<<"Invalid Input\n\n";
+        goto inp_c ;
+        }else if(!(c >0 && c < 4))
+        {
+            cout<<"Column  Number Must Be Between 1 and 3\n\n";
+            turn--;
+            goto inp_c;
+        }
+
+        if((mat[r-1][c-1] == 'x') || (mat[r-1][c-1] == 'o') )
+        {
+            cout<<"This spot is already taken :( , choose another ! \n\n";
+            goto inp_r;
+
+        }
 
         change(mat, r-1,c-1,turn);
         system("cls");
-        print_mat(mat);
+
 
 
         if(check(mat,p1,p2,turn)== p1)
         {
-            cout<<p1<<" Is The Winner\n\n";
+            cout<<"\n\n\n\t\t\t"<<p1<<" Is The Winner\n\n\n\n";
             break;
         }
         else if(check(mat,p1,p2,turn)== p2)
         {
-            cout<<p2<<" Is The Winner\n\n";
+            cout<<"\n\n\n\t\t\t"<<p2<<" Is The Winner\n\n\n\n";
             break;
         }
         if(turn ==9)
