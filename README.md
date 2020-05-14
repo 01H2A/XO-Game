@@ -1,2 +1,3 @@
-# XO-Game
-XO Game
+# TicTacToe !
+
+  2-players TicTacToe game.
