@@ -1,3 +1,3 @@
 # TicTacToe !
 
-  2-players TicTacToe game.
+  a simple 2-players TicTacToe game.
